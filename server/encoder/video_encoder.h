@@ -76,7 +76,7 @@ private:
 
 public:
 	const uint8_t stream_idx;
-	static const uint8_t num_slots = 2;
+	static const uint8_t num_slots = 3;
 	const double bitrate_multiplier;
 
 private:

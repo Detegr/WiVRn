@@ -38,7 +38,6 @@ private:
 	std::shared_ptr<video_encoder_nvenc_shared_state> shared_state;
 
 	void * session_handle = nullptr;
-	NV_ENC_OUTPUT_PTR outputBuffer;
 	NV_ENC_CONFIG config;
 	NV_ENC_INITIALIZE_PARAMS init_params;
 
@@ -62,6 +61,7 @@ private:
 		vk::raii::Buffer yuv = nullptr;
 		vk::raii::DeviceMemory mem = nullptr;
 		NV_ENC_REGISTERED_PTR nvenc_resource;
+        NV_ENC_OUTPUT_PTR outputBuffer = nullptr;
 
         vk::raii::Semaphore vk_sem = nullptr;
         CUexternalSemaphore cu_sem = nullptr;

@@ -315,12 +315,6 @@ video_encoder_nvenc::video_encoder_nvenc(
 
 	NVENC_CHECK(shared_state->fn.nvEncInitializeEncoder(session_handle, &init_params));
 
-	NV_ENC_CREATE_BITSTREAM_BUFFER out_buf_params{
-	        .version = NV_ENC_CREATE_BITSTREAM_BUFFER_VER,
-	};
-	NVENC_CHECK(shared_state->fn.nvEncCreateBitstreamBuffer(session_handle, &out_buf_params));
-	outputBuffer = out_buf_params.bitstreamBuffer;
-
 	vk::DeviceSize buffer_size = extent.width * extent.height * bytesPerPixel * 3 / 2;
 
 	vk::StructureChain buffer_create_info{
@@ -412,6 +406,12 @@ video_encoder_nvenc::video_encoder_nvenc(
 		};
 		NVENC_CHECK(shared_state->fn.nvEncRegisterResource(session_handle, &resource_params));
 		i.nvenc_resource = resource_params.registeredResource;
+
+        NV_ENC_CREATE_BITSTREAM_BUFFER out_buf_params{
+                .version = NV_ENC_CREATE_BITSTREAM_BUFFER_VER,
+        };
+        NVENC_CHECK(shared_state->fn.nvEncCreateBitstreamBuffer(session_handle, &out_buf_params));
+        i.outputBuffer = out_buf_params.bitstreamBuffer;
 	}
 	CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
 }
@@ -547,7 +547,7 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
             .frameIdx = 0,
             .inputTimeStamp = 0,
             .inputBuffer = mappedResource.resource(),
-            .outputBitstream = outputBuffer,
+            .outputBitstream = in[slot].outputBuffer,
             .bufferFmt = mappedResource.bufferFmt(),
             .pictureStruct = NV_ENC_PIC_STRUCT_FRAME,
     };
@@ -564,29 +564,46 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
             break;
     }
     NVENC_CHECK(shared_state->fn.nvEncEncodePicture(session_handle, &frame_params));
-
-    NV_ENC_LOCK_BITSTREAM buf_lock_params{
-            .version = NV_ENC_LOCK_BITSTREAM_VER,
-            .doNotWait = 0,
-            .outputBitstream = outputBuffer,
-    };
-    NVENC_CHECK(shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params));
     NVENC_CHECK(mappedResource.unmap());
 
-    if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
-        idr_handler.set_non_ref(frame_index);
+    const auto prev_slot = (slot + num_slots - 1) % num_slots;
+    NV_ENC_LOCK_BITSTREAM buf_lock_params{
+            .version = NV_ENC_LOCK_BITSTREAM_VER,
+            .doNotWait = 1,
+            .outputBitstream = in[prev_slot].outputBuffer,
+    };
 
+    NVENCSTATUS bitstream_lock_status = shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params);
     CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
-	return data{
-	        .encoder = this,
-	        .span = std::span((uint8_t *)buf_lock_params.bitstreamBufferPtr, buf_lock_params.bitstreamSizeInBytes),
-	        .mem = std::shared_ptr<void>(buf_lock_params.bitstreamBufferPtr, [this](void *) {
-		        NVENCSTATUS status = shared_state->fn.nvEncUnlockBitstream(session_handle, outputBuffer);
-		        if (status != NV_ENC_SUCCESS)
-			        U_LOG_E("%s:%d: %d, %s", __FILE__, __LINE__, status, shared_state->fn.nvEncGetLastErrorString(session_handle));
-	        }),
-	        .prefer_control = frame_type == default_idr_handler::frame_type::i,
-	};
+
+    if (bitstream_lock_status == NV_ENC_SUCCESS)
+    {
+        if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
+            idr_handler.set_non_ref(frame_index);
+
+        return data{
+                .encoder = this,
+                .span = std::span((uint8_t *)buf_lock_params.bitstreamBufferPtr, buf_lock_params.bitstreamSizeInBytes),
+                .mem = std::shared_ptr<void>(buf_lock_params.bitstreamBufferPtr, [this, prev_slot](void *) {
+                    CU_CHECK(shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda));
+                    NVENCSTATUS status = shared_state->fn.nvEncUnlockBitstream(session_handle, in[prev_slot].outputBuffer);
+                    if (status != NV_ENC_SUCCESS)
+                        U_LOG_E("%s:%d: %d, %s", __FILE__, __LINE__, status, shared_state->fn.nvEncGetLastErrorString(session_handle));
+                    CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
+                }),
+                .prefer_control = frame_type == default_idr_handler::frame_type::i,
+        };
+    }
+    else if (bitstream_lock_status == NV_ENC_ERR_LOCK_BUSY)
+    {
+        // Previous frame not ready
+        return {};
+    }
+    else
+    {
+        NVENC_CHECK(bitstream_lock_status);
+        return {};
+    }
 }
 
 std::array<int, 2> video_encoder_nvenc::get_max_size(video_codec codec)
