@@ -62,6 +62,9 @@ private:
 		vk::raii::Buffer yuv = nullptr;
 		vk::raii::DeviceMemory mem = nullptr;
 		NV_ENC_REGISTERED_PTR nvenc_resource;
+
+        vk::raii::Semaphore vk_sem = nullptr;
+        CUexternalSemaphore cu_sem = nullptr;
 	};
 	std::array<in_t, num_slots> in;
 
