@@ -130,6 +130,31 @@ static void check_profile_guid_supported(std::shared_ptr<video_encoder_nvenc_sha
 	}
 }
 
+video_encoder_nvenc::scoped_resource::scoped_resource(void * session_handle, NV_ENC_REGISTERED_PTR resource, std::shared_ptr<video_encoder_nvenc_shared_state> st) : session_handle(session_handle), shared_state(st), params{.version = NV_ENC_MAP_INPUT_RESOURCE_VER, .registeredResource = resource}
+{
+	NVENC_CHECK(shared_state->fn.nvEncMapInputResource(session_handle, &params));
+}
+
+NVENCSTATUS video_encoder_nvenc::scoped_resource::unmap()
+{
+	NVENCSTATUS ret = shared_state->fn.nvEncUnmapInputResource(session_handle, params.mappedResource);
+	if (ret == NV_ENC_SUCCESS)
+		params.mappedResource = nullptr;
+
+	return ret;
+}
+
+video_encoder_nvenc::scoped_resource::~scoped_resource()
+{
+	if (resource())
+	{
+		if (const auto status = unmap(); status != NV_ENC_SUCCESS)
+		{
+			U_LOG_E("failed to unmap nvenc resource: %d", status);
+		}
+	}
+}
+
 NV_ENC_RC_PARAMS video_encoder_nvenc::get_rc_params(uint64_t bitrate, float framerate)
 {
 	return {
@@ -456,11 +481,7 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
 		}
 	}
 
-	NV_ENC_MAP_INPUT_RESOURCE inp_resource_params{
-	        .version = NV_ENC_MAP_INPUT_RESOURCE_VER,
-	        .registeredResource = in[slot].nvenc_resource};
-
-	NVENC_CHECK(shared_state->fn.nvEncMapInputResource(session_handle, &inp_resource_params));
+	scoped_resource mappedResource(session_handle, in[slot].nvenc_resource, shared_state);
 
 	NV_ENC_PIC_PARAMS frame_params{
 	        .version = NV_ENC_PIC_PARAMS_VER,
@@ -470,9 +491,9 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
 	        .encodePicFlags = 0,
 	        .frameIdx = 0,
 	        .inputTimeStamp = 0,
-	        .inputBuffer = inp_resource_params.mappedResource,
+	        .inputBuffer = mappedResource.resource(),
 	        .outputBitstream = outputBuffer,
-	        .bufferFmt = inp_resource_params.mappedBufferFmt,
+	        .bufferFmt = mappedResource.bufferFmt(),
 	        .pictureStruct = NV_ENC_PIC_STRUCT_FRAME,
 	};
 
@@ -495,6 +516,7 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
 	        .outputBitstream = outputBuffer,
 	};
 	NVENC_CHECK(shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params));
+	NVENC_CHECK(mappedResource.unmap());
 
 	if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
 		idr_handler.set_non_ref(frame_index);
