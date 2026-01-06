@@ -356,6 +356,26 @@ video_encoder_nvenc::video_encoder_nvenc(
 		        .handleType = vk::ExternalMemoryHandleTypeFlagBitsKHR::eOpaqueFd,
 		});
 
+		vk::StructureChain semaphore_create_info{
+		        vk::SemaphoreCreateInfo{},
+		        vk::ExportSemaphoreCreateInfo{
+		                .handleTypes = vk::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd,
+		        },
+		};
+		i.vk_sem = vk::raii::Semaphore(vk.device, semaphore_create_info.get());
+		vk.name(i.vk_sem, "nvenc signal semaphore");
+		int sem_fd = vk.device.getSemaphoreFdKHR({
+		        .semaphore = *i.vk_sem,
+		        .handleType = vk::ExternalSemaphoreHandleTypeFlagBits::eOpaqueFd,
+		});
+
+		CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC sem_desc{
+		        .type = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD,
+		        .handle = {.fd = sem_fd},
+		        .flags = 0,
+		};
+		CU_CHECK(shared_state->cuda_fn->cuImportExternalSemaphore(&i.cu_sem, &sem_desc));
+
 		CUdeviceptr frame;
 		CU_CHECK(shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda));
 		{
@@ -394,6 +414,16 @@ video_encoder_nvenc::video_encoder_nvenc(
 
 video_encoder_nvenc::~video_encoder_nvenc()
 {
+	shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda);
+	for (auto & i: in)
+	{
+		if (i.cu_sem)
+		{
+			shared_state->cuda_fn->cuDestroyExternalSemaphore(i.cu_sem);
+		}
+	}
+	shared_state->cuda_fn->cuCtxPopCurrent(NULL);
+
 	if (session_handle)
 		shared_state->fn.nvEncDestroyEncoder(session_handle);
 }
@@ -432,12 +462,33 @@ std::pair<bool, vk::Semaphore> video_encoder_nvenc::present_image(vk::Image y_cb
 	                        },
 	                }});
 
-	return {false, nullptr};
+	vk::BufferMemoryBarrier buf_write_barrier{
+	        .srcAccessMask = vk::AccessFlagBits::eTransferWrite,
+	        .dstAccessMask = vk::AccessFlagBits::eMemoryRead, // Visible to CUDA
+	        .srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED,
+	        .dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED,
+	        .buffer = *in[slot].yuv,
+	        .offset = 0,
+	        .size = VK_WHOLE_SIZE};
+
+	cmd_buf.pipelineBarrier(
+	        vk::PipelineStageFlagBits::eTransfer,     // Wait for copy to finish
+	        vk::PipelineStageFlagBits::eBottomOfPipe, // Block until barrier executes
+	        {},
+	        nullptr,
+	        buf_write_barrier,
+	        nullptr);
+
+	return {false, *in[slot].vk_sem};
 }
 
 std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uint64_t frame_index)
 {
 	CU_CHECK(shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda));
+
+	CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS wait_params = {0};
+	CU_CHECK(shared_state->cuda_fn->cuWaitExternalSemaphoresAsync(&in[slot].cu_sem, &wait_params, 1, 0));
+
 	auto & idr_handler = ((default_idr_handler &)*idr);
 
 	auto new_bitrate = pending_bitrate.exchange(0);
