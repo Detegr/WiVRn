@@ -42,6 +42,21 @@ private:
 	NV_ENC_CONFIG config;
 	NV_ENC_INITIALIZE_PARAMS init_params;
 
+    struct scoped_resource
+    {
+    private:
+        void * session_handle;
+        std::shared_ptr<video_encoder_nvenc_shared_state> shared_state;
+        NV_ENC_MAP_INPUT_RESOURCE params;
+
+    public:
+        scoped_resource(void * session_handle, NV_ENC_REGISTERED_PTR resource, std::shared_ptr<video_encoder_nvenc_shared_state> st);
+        ~scoped_resource();
+        NVENCSTATUS unmap();
+        NV_ENC_INPUT_PTR resource() const { return params.mappedResource; }
+        NV_ENC_BUFFER_FORMAT bufferFmt() const { return params.mappedBufferFmt; }
+    };
+
 	struct in_t
 	{
 		vk::raii::Buffer yuv = nullptr;

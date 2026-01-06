@@ -130,6 +130,35 @@ static void check_profile_guid_supported(std::shared_ptr<video_encoder_nvenc_sha
 	}
 }
 
+video_encoder_nvenc::scoped_resource::scoped_resource(void * session_handle, NV_ENC_REGISTERED_PTR resource, std::shared_ptr<video_encoder_nvenc_shared_state> st)
+    : session_handle(session_handle), shared_state(st), params{
+        .version = NV_ENC_MAP_INPUT_RESOURCE_VER,
+        .registeredResource = resource
+    }
+{
+    NVENC_CHECK(shared_state->fn.nvEncMapInputResource(session_handle, &params));
+}
+
+NVENCSTATUS video_encoder_nvenc::scoped_resource::unmap()
+{
+    NVENCSTATUS ret = shared_state->fn.nvEncUnmapInputResource(session_handle, params.mappedResource);
+    if (ret == NV_ENC_SUCCESS)
+        params.mappedResource = nullptr;
+
+    return ret;
+}
+
+video_encoder_nvenc::scoped_resource::~scoped_resource()
+{
+    if (resource())
+    {
+        if (const auto status = unmap(); status != NV_ENC_SUCCESS)
+        {
+            U_LOG_E("failed to unmap nvenc resource: %d", status);
+        }
+    }
+}
+
 NV_ENC_RC_PARAMS video_encoder_nvenc::get_rc_params(uint64_t bitrate, float framerate)
 {
 	return {
@@ -456,50 +485,47 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
 		}
 	}
 
-	NV_ENC_MAP_INPUT_RESOURCE inp_resource_params{
-	        .version = NV_ENC_MAP_INPUT_RESOURCE_VER,
-	        .registeredResource = in[slot].nvenc_resource};
+    scoped_resource mappedResource(session_handle, in[slot].nvenc_resource, shared_state);
 
-	NVENC_CHECK(shared_state->fn.nvEncMapInputResource(session_handle, &inp_resource_params));
+    NV_ENC_PIC_PARAMS frame_params{
+            .version = NV_ENC_PIC_PARAMS_VER,
+            .inputWidth = extent.width,
+            .inputHeight = extent.height,
+            .inputPitch = extent.width,
+            .encodePicFlags = 0,
+            .frameIdx = 0,
+            .inputTimeStamp = 0,
+            .inputBuffer = mappedResource.resource(),
+            .outputBitstream = outputBuffer,
+            .bufferFmt = mappedResource.bufferFmt(),
+            .pictureStruct = NV_ENC_PIC_STRUCT_FRAME,
+    };
 
-	NV_ENC_PIC_PARAMS frame_params{
-	        .version = NV_ENC_PIC_PARAMS_VER,
-	        .inputWidth = extent.width,
-	        .inputHeight = extent.height,
-	        .inputPitch = extent.width,
-	        .encodePicFlags = 0,
-	        .frameIdx = 0,
-	        .inputTimeStamp = 0,
-	        .inputBuffer = inp_resource_params.mappedResource,
-	        .outputBitstream = outputBuffer,
-	        .bufferFmt = inp_resource_params.mappedBufferFmt,
-	        .pictureStruct = NV_ENC_PIC_STRUCT_FRAME,
-	};
+    auto frame_type = idr_handler.get_type(frame_index);
+    switch (frame_type)
+    {
+        case default_idr_handler::frame_type::i:
+            frame_params.encodePicFlags |= NV_ENC_PIC_FLAG_FORCEIDR | NV_ENC_PIC_FLAG_OUTPUT_SPSPPS;
+            frame_params.pictureType = NV_ENC_PIC_TYPE_IDR;
+            break;
+        case default_idr_handler::frame_type::p:
+            frame_params.pictureType = NV_ENC_PIC_TYPE_UNKNOWN;
+            break;
+    }
+    NVENC_CHECK(shared_state->fn.nvEncEncodePicture(session_handle, &frame_params));
 
-	auto frame_type = idr_handler.get_type(frame_index);
-	switch (frame_type)
-	{
-		case default_idr_handler::frame_type::i:
-			frame_params.encodePicFlags |= NV_ENC_PIC_FLAG_FORCEIDR | NV_ENC_PIC_FLAG_OUTPUT_SPSPPS;
-			frame_params.pictureType = NV_ENC_PIC_TYPE_IDR;
-			break;
-		case default_idr_handler::frame_type::p:
-			frame_params.pictureType = NV_ENC_PIC_TYPE_UNKNOWN;
-			break;
-	}
-	NVENC_CHECK(shared_state->fn.nvEncEncodePicture(session_handle, &frame_params));
+    NV_ENC_LOCK_BITSTREAM buf_lock_params{
+            .version = NV_ENC_LOCK_BITSTREAM_VER,
+            .doNotWait = 0,
+            .outputBitstream = outputBuffer,
+    };
+    NVENC_CHECK(shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params));
+    NVENC_CHECK(mappedResource.unmap());
 
-	NV_ENC_LOCK_BITSTREAM buf_lock_params{
-	        .version = NV_ENC_LOCK_BITSTREAM_VER,
-	        .doNotWait = 0,
-	        .outputBitstream = outputBuffer,
-	};
-	NVENC_CHECK(shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params));
+    if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
+        idr_handler.set_non_ref(frame_index);
 
-	if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
-		idr_handler.set_non_ref(frame_index);
-
-	CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
+    CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
 	return data{
 	        .encoder = this,
 	        .span = std::span((uint8_t *)buf_lock_params.bitstreamBufferPtr, buf_lock_params.bitstreamSizeInBytes),
