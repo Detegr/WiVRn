@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include "utils/sync_queue.h"
 #include "video_encoder.h"
 #include "video_encoder_nvenc_shared_state.h"
 #include <array>
@@ -38,9 +39,16 @@ private:
 	std::shared_ptr<video_encoder_nvenc_shared_state> shared_state;
 
 	void * session_handle = nullptr;
-	NV_ENC_OUTPUT_PTR outputBuffer;
 	NV_ENC_CONFIG config;
 	NV_ENC_INITIALIZE_PARAMS init_params;
+
+	std::thread encode_consumer_thread;
+	bool encode_consumer_running;
+	uint8_t current_consumer_slot;
+	std::mutex job_mutex;
+	std::mutex result_mutex;
+	std::condition_variable job_cv;
+	std::array<std::optional<video_encoder::data>, num_slots> results;
 
 	struct scoped_resource
 	{
@@ -65,6 +73,9 @@ private:
 
 	struct in_t
 	{
+		std::optional<uint64_t> frame_index; // job is queued if frame_index has value
+		NV_ENC_OUTPUT_PTR output_buffer;
+
 		vk::raii::Buffer yuv = nullptr;
 		vk::raii::DeviceMemory mem = nullptr;
 		NV_ENC_REGISTERED_PTR nvenc_resource;
@@ -80,6 +91,7 @@ private:
 
 	NV_ENC_RC_PARAMS get_rc_params(uint64_t bitrate, float framerate);
 	void set_init_params_fps(float framerate);
+	void run_encode_consumer();
 
 public:
 	video_encoder_nvenc(wivrn_vk_bundle & vk, const encoder_settings & settings, uint8_t stream_idx);

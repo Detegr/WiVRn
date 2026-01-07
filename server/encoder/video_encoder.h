@@ -54,6 +54,7 @@ protected:
 		video_encoder * encoder;
 		std::span<uint8_t> span;
 		std::shared_ptr<void> mem;
+		uint64_t frame_index = 0;
 		// true if data should be sent over reliable (TCP) socket
 		bool prefer_control = false;
 	};

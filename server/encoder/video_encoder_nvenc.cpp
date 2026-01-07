@@ -130,7 +130,8 @@ static void check_profile_guid_supported(std::shared_ptr<video_encoder_nvenc_sha
 	}
 }
 
-video_encoder_nvenc::scoped_resource::scoped_resource(void * session_handle, NV_ENC_REGISTERED_PTR resource, std::shared_ptr<video_encoder_nvenc_shared_state> st) : session_handle(session_handle), shared_state(st), params{.version = NV_ENC_MAP_INPUT_RESOURCE_VER, .registeredResource = resource}
+video_encoder_nvenc::scoped_resource::scoped_resource(void * session_handle, NV_ENC_REGISTERED_PTR resource, std::shared_ptr<video_encoder_nvenc_shared_state> st) :
+        session_handle(session_handle), shared_state(st), params{.version = NV_ENC_MAP_INPUT_RESOURCE_VER, .registeredResource = resource}
 {
 	NVENC_CHECK(shared_state->fn.nvEncMapInputResource(session_handle, &params));
 }
@@ -311,12 +312,6 @@ video_encoder_nvenc::video_encoder_nvenc(
 
 	NVENC_CHECK(shared_state->fn.nvEncInitializeEncoder(session_handle, &init_params));
 
-	NV_ENC_CREATE_BITSTREAM_BUFFER out_buf_params{
-	        .version = NV_ENC_CREATE_BITSTREAM_BUFFER_VER,
-	};
-	NVENC_CHECK(shared_state->fn.nvEncCreateBitstreamBuffer(session_handle, &out_buf_params));
-	outputBuffer = out_buf_params.bitstreamBuffer;
-
 	vk::DeviceSize buffer_size = extent.width * extent.height * bytesPerPixel * 3 / 2;
 
 	vk::StructureChain buffer_create_info{
@@ -331,6 +326,12 @@ video_encoder_nvenc::video_encoder_nvenc(
 
 	for (auto & i: in)
 	{
+		NV_ENC_CREATE_BITSTREAM_BUFFER out_buf_params{
+		        .version = NV_ENC_CREATE_BITSTREAM_BUFFER_VER,
+		};
+		NVENC_CHECK(shared_state->fn.nvEncCreateBitstreamBuffer(session_handle, &out_buf_params));
+		i.output_buffer = out_buf_params.bitstreamBuffer;
+
 		i.yuv = vk::raii::Buffer(vk.device, buffer_create_info.get());
 		vk.name(i.yuv, "nvenc yuv buffer");
 		auto memory_req = i.yuv.getMemoryRequirements();
@@ -410,16 +411,30 @@ video_encoder_nvenc::video_encoder_nvenc(
 		i.nvenc_resource = resource_params.registeredResource;
 	}
 	CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
+
+	encode_consumer_running = true;
+	current_consumer_slot = 1;
+	encode_consumer_thread = std::thread([this]() { run_encode_consumer(); });
 }
 
 video_encoder_nvenc::~video_encoder_nvenc()
 {
+	encode_consumer_running = false;
+	job_cv.notify_all();
+	if (encode_consumer_thread.joinable())
+		encode_consumer_thread.join();
 	shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda);
 	for (auto & i: in)
 	{
 		if (i.cu_sem)
 		{
 			shared_state->cuda_fn->cuDestroyExternalSemaphore(i.cu_sem);
+		}
+
+		if (session_handle)
+		{
+			shared_state->fn.nvEncUnregisterResource(session_handle, i.nvenc_resource);
+			shared_state->fn.nvEncDestroyBitstreamBuffer(session_handle, i.output_buffer);
 		}
 	}
 	shared_state->cuda_fn->cuCtxPopCurrent(NULL);
@@ -430,6 +445,15 @@ video_encoder_nvenc::~video_encoder_nvenc()
 
 std::pair<bool, vk::Semaphore> video_encoder_nvenc::present_image(vk::Image y_cbcr, vk::raii::CommandBuffer & cmd_buf, uint8_t slot, uint64_t)
 {
+	{
+		std::lock_guard lock(job_mutex);
+		if (in[slot].frame_index.has_value())
+		{
+			U_LOG_W("Skipping frame, encoder slot %d busy", slot);
+			return {false, *in[slot].vk_sem};
+		}
+	}
+
 	cmd_buf.copyImageToBuffer(
 	        y_cbcr,
 	        vk::ImageLayout::eTransferSrcOptimal,
@@ -484,105 +508,176 @@ std::pair<bool, vk::Semaphore> video_encoder_nvenc::present_image(vk::Image y_cb
 
 std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uint64_t frame_index)
 {
-	CU_CHECK(shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda));
-
-	CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS wait_params = {0};
-	CU_CHECK(shared_state->cuda_fn->cuWaitExternalSemaphoresAsync(&in[slot].cu_sem, &wait_params, 1, 0));
-
-	auto & idr_handler = ((default_idr_handler &)*idr);
-
-	auto new_bitrate = pending_bitrate.exchange(0);
-	auto new_framerate = pending_framerate.exchange(0);
-
-	if (new_bitrate || new_framerate)
+	// Queue a new encoding job
 	{
-		if (new_framerate)
-			U_LOG_I("nvenc: reconfiguring framerate, new value: %f", new_framerate);
-		else
-			new_framerate = fps;
+		std::lock_guard lock(job_mutex);
+		in[slot].frame_index = frame_index;
+	}
+	job_cv.notify_all();
 
-		if (new_bitrate)
-			U_LOG_I("nvenc: reconfiguring bitrate, new value: %d", new_bitrate);
-		else
-			new_bitrate = bitrate;
+	// Check if this slot had a previously encoded frame
+	std::lock_guard lock(result_mutex);
 
-		config.rcParams = get_rc_params(new_bitrate, new_framerate);
-		set_init_params_fps(new_framerate);
-
-		NV_ENC_RECONFIGURE_PARAMS reconfig_params{
-		        .version = NV_ENC_RECONFIGURE_PARAMS_VER,
-		        .reInitEncodeParams = init_params,
-		        .resetEncoder = 1,
-		        .forceIDR = 1};
-
-		try
+	uint64_t oldest_frame_index = UINT64_MAX;
+	size_t oldest_frame_slot = 0;
+	for (auto i = 0; i < num_slots; ++i)
+	{
+		if (results[i].has_value())
 		{
-			NVENC_CHECK(shared_state->fn.nvEncReconfigureEncoder(session_handle, &reconfig_params));
-			fps = new_framerate;
-			bitrate = new_bitrate;
-			idr_handler.reset();
-
-			U_LOG_I("nvenc: reconfiguring succeeded.");
-		}
-		catch (const std::exception & e)
-		{
-			U_LOG_E("nvenc: reconfiguring failed.");
-			config.rcParams = get_rc_params(bitrate, fps);
-			set_init_params_fps(fps);
+			const auto frame_index = results[i]->frame_index;
+			if (frame_index < oldest_frame_index)
+			{
+				oldest_frame_index = frame_index;
+				oldest_frame_slot = i;
+			}
 		}
 	}
 
-	scoped_resource mappedResource(session_handle, in[slot].nvenc_resource, shared_state);
-
-	NV_ENC_PIC_PARAMS frame_params{
-	        .version = NV_ENC_PIC_PARAMS_VER,
-	        .inputWidth = extent.width,
-	        .inputHeight = extent.height,
-	        .inputPitch = extent.width,
-	        .encodePicFlags = 0,
-	        .frameIdx = 0,
-	        .inputTimeStamp = 0,
-	        .inputBuffer = mappedResource.resource(),
-	        .outputBitstream = outputBuffer,
-	        .bufferFmt = mappedResource.bufferFmt(),
-	        .pictureStruct = NV_ENC_PIC_STRUCT_FRAME,
-	};
-
-	auto frame_type = idr_handler.get_type(frame_index);
-	switch (frame_type)
+	if (oldest_frame_index < UINT64_MAX)
 	{
-		case default_idr_handler::frame_type::i:
-			frame_params.encodePicFlags |= NV_ENC_PIC_FLAG_FORCEIDR | NV_ENC_PIC_FLAG_OUTPUT_SPSPPS;
-			frame_params.pictureType = NV_ENC_PIC_TYPE_IDR;
-			break;
-		case default_idr_handler::frame_type::p:
-			frame_params.pictureType = NV_ENC_PIC_TYPE_UNKNOWN;
-			break;
+		auto result = std::move(results[oldest_frame_slot].value());
+		results[oldest_frame_slot].reset();
+		return result;
 	}
-	NVENC_CHECK(shared_state->fn.nvEncEncodePicture(session_handle, &frame_params));
+	else
+	{
+		return {};
+	}
+}
 
-	NV_ENC_LOCK_BITSTREAM buf_lock_params{
-	        .version = NV_ENC_LOCK_BITSTREAM_VER,
-	        .doNotWait = 0,
-	        .outputBitstream = outputBuffer,
-	};
-	NVENC_CHECK(shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params));
-	NVENC_CHECK(mappedResource.unmap());
+void video_encoder_nvenc::run_encode_consumer()
+{
+	pthread_setname_np(pthread_self(), "nvenc_encode_consumer_thread");
+	U_LOG_I("nvenc: consumer thread started");
 
-	if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
-		idr_handler.set_non_ref(frame_index);
+	try
+	{
+		CU_CHECK(shared_state->cuda_fn->cuCtxPushCurrent(shared_state->cuda));
+		for (;; current_consumer_slot++)
+		{
+			uint8_t slot = current_consumer_slot % num_slots;
 
-	CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
-	return data{
-	        .encoder = this,
-	        .span = std::span((uint8_t *)buf_lock_params.bitstreamBufferPtr, buf_lock_params.bitstreamSizeInBytes),
-	        .mem = std::shared_ptr<void>(buf_lock_params.bitstreamBufferPtr, [this](void *) {
-		        NVENCSTATUS status = shared_state->fn.nvEncUnlockBitstream(session_handle, outputBuffer);
-		        if (status != NV_ENC_SUCCESS)
-			        U_LOG_E("%s:%d: %d, %s", __FILE__, __LINE__, status, shared_state->fn.nvEncGetLastErrorString(session_handle));
-	        }),
-	        .prefer_control = frame_type == default_idr_handler::frame_type::i,
-	};
+			std::unique_lock lock(job_mutex);
+			job_cv.wait(lock, [&] { return in[slot].frame_index.has_value() || !encode_consumer_running; });
+
+			if (!encode_consumer_running)
+				break;
+
+			auto frame_index = in[slot].frame_index.value();
+
+			CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS wait_params = {0};
+			// Wait for previous present for this slot before encoding a new frame
+			CU_CHECK(shared_state->cuda_fn->cuWaitExternalSemaphoresAsync(&in[slot].cu_sem, &wait_params, 1, 0));
+
+			auto & idr_handler = ((default_idr_handler &)*idr);
+			auto new_bitrate = pending_bitrate.exchange(0);
+			auto new_framerate = pending_framerate.exchange(0);
+
+			if (new_bitrate || new_framerate)
+			{
+				if (new_framerate)
+					U_LOG_I("nvenc: reconfiguring framerate, new value: %f", new_framerate);
+				else
+					new_framerate = fps;
+
+				if (new_bitrate)
+					U_LOG_I("nvenc: reconfiguring bitrate, new value: %d", new_bitrate);
+				else
+					new_bitrate = bitrate;
+
+				config.rcParams = get_rc_params(new_bitrate, new_framerate);
+				set_init_params_fps(new_framerate);
+
+				NV_ENC_RECONFIGURE_PARAMS reconfig_params{
+				        .version = NV_ENC_RECONFIGURE_PARAMS_VER,
+				        .reInitEncodeParams = init_params,
+				        .resetEncoder = 1,
+				        .forceIDR = 1};
+
+				try
+				{
+					NVENC_CHECK(shared_state->fn.nvEncReconfigureEncoder(session_handle, &reconfig_params));
+					fps = new_framerate;
+					bitrate = new_bitrate;
+					idr_handler.reset();
+
+					U_LOG_I("nvenc: reconfiguring succeeded.");
+				}
+				catch (const std::exception & e)
+				{
+					U_LOG_E("nvenc: reconfiguring failed.");
+					config.rcParams = get_rc_params(bitrate, fps);
+					set_init_params_fps(fps);
+				}
+			}
+
+			scoped_resource mappedResource(session_handle, in[slot].nvenc_resource, shared_state);
+			NV_ENC_PIC_PARAMS frame_params{
+			        .version = NV_ENC_PIC_PARAMS_VER,
+			        .inputWidth = extent.width,
+			        .inputHeight = extent.height,
+			        .inputPitch = extent.width,
+			        .encodePicFlags = 0,
+			        .frameIdx = 0,
+			        .inputTimeStamp = 0,
+			        .inputBuffer = mappedResource.resource(),
+			        .outputBitstream = in[slot].output_buffer,
+			        .bufferFmt = mappedResource.bufferFmt(),
+			        .pictureStruct = NV_ENC_PIC_STRUCT_FRAME,
+			};
+
+			auto frame_type = idr_handler.get_type(frame_index);
+			switch (frame_type)
+			{
+				case default_idr_handler::frame_type::i:
+					frame_params.encodePicFlags |= NV_ENC_PIC_FLAG_FORCEIDR | NV_ENC_PIC_FLAG_OUTPUT_SPSPPS;
+					frame_params.pictureType = NV_ENC_PIC_TYPE_IDR;
+					break;
+				case default_idr_handler::frame_type::p:
+					frame_params.pictureType = NV_ENC_PIC_TYPE_UNKNOWN;
+					break;
+			}
+			NVENC_CHECK(shared_state->fn.nvEncEncodePicture(session_handle, &frame_params));
+			NVENC_CHECK(mappedResource.unmap());
+
+			NV_ENC_LOCK_BITSTREAM buf_lock_params{
+			        .version = NV_ENC_LOCK_BITSTREAM_VER,
+			        .doNotWait = 0,
+			        .outputBitstream = in[slot].output_buffer,
+			};
+			NVENC_CHECK(shared_state->fn.nvEncLockBitstream(session_handle, &buf_lock_params));
+			const auto frame_data_size = buf_lock_params.bitstreamSizeInBytes;
+			std::shared_ptr<uint8_t[]> frame_data(new uint8_t[frame_data_size]);
+			memcpy(frame_data.get(), buf_lock_params.bitstreamBufferPtr, frame_data_size);
+
+			if (buf_lock_params.pictureType == NV_ENC_PIC_TYPE_NONREF_P)
+				idr_handler.set_non_ref(frame_index);
+
+			NVENC_CHECK(shared_state->fn.nvEncUnlockBitstream(session_handle, in[slot].output_buffer));
+
+			// GPU work is done, allow reusing this slot
+			in[slot].frame_index.reset();
+			job_cv.notify_all();
+
+			video_encoder::data ret = {
+			        .encoder = this,
+			        .span = std::span(frame_data.get(), frame_data_size),
+			        .mem = std::move(frame_data),
+			        .frame_index = frame_index,
+			        .prefer_control = frame_type == default_idr_handler::frame_type::i,
+			};
+
+			{
+				std::lock_guard lock(result_mutex);
+				results[slot] = std::move(ret);
+			}
+		}
+		CU_CHECK(shared_state->cuda_fn->cuCtxPopCurrent(NULL));
+	}
+	catch (const std::exception & e)
+	{
+		U_LOG_D("nvenc: error in consumer thread: %s", e.what());
+	}
 }
 
 std::array<int, 2> video_encoder_nvenc::get_max_size(video_codec codec)
