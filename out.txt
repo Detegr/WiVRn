@@ -1,0 +1,393 @@
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279600.017ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279644.531ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.512038ms (6279720335707) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.553483ms (6279731377152)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.442372ms (6279720266041) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279678.890ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.437485ms (6279764887265) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.524042ms (6279775973822)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.358529ms (6279764808309) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279723.516ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.23ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279811.009ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 43.201828ms (6279876245646) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 54.312939ms (6279887356757)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 43.201828ms (6279876245646) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279834.107ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279866.934ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279889.322ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.588921ms (6279976500185) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.664468ms (6279987575732)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.497283ms (6279976408547) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279934.979ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.525178ms (6280021064373) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.609397ms (6280032148592)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.441031ms (6280020980226) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6279979.605ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280000.726ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280056.635ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.731583ms (6280143585631) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.812903ms (6280154666951)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.645055ms (6280143499103) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280101.917ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280123.195ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.690887ms (6280210419095) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.776402ms (6280221504610)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.614385ms (6280210342593) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280168.793ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.566558ms (6280254968809) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.651823ms (6280266054074)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.489214ms (6280254891465) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280213.466ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 42.670593ms (6280299515451) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 53.755607ms (6280310600465)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 42.594359ms (6280299439217) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280257.908ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280301.547ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280323.837ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.23ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280412.748ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280457.320ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:10 d wivrn-server[22102]:         next frame: 43.151338ms (6280522261060) (next time for compositor to pick up frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         progress: 54.262449ms (6280533372171)  (latest completed frame)
+Jan 08 21:54:10 d wivrn-server[22102]:         scheduled: 43.151338ms (6280522261060) (oldest waiting frame)
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280480.175ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280501.868ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280535.317ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:10 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.649887ms (6280622530871) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 53.739733ms (6280633620717)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.569080ms (6280622450064) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280580.945ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.732364ms (6280667070265) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 53.818408ms (6280678156309)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.660839ms (6280666998740) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280625.401ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.733682ms (6280700480883) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 53.792560ms (6280711539761)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.681449ms (6280700428650) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280658.812ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280716.700ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.825389ms (6280778406966) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 53.936500ms (6280789518077)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.825389ms (6280778406966) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280736.646ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.14ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280791.475ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 43.041462ms (6280856357902) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.152573ms (6280867469013)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 43.041462ms (6280856357902) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280814.381ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.934279ms (6280900941342) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.018518ms (6280912025581)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.853764ms (6280900860827) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280859.072ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280913.631ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6280958.109ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281069.311ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281102.713ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281136.542ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 43.031621ms (6281201654669) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.142732ms (6281212765780)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 43.031621ms (6281201654669) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281159.688ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 43.102402ms (6281235098738) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.157679ms (6281246154015)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 43.046568ms (6281235042904) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281193.068ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281236.867ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.940461ms (6281324221802) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.026727ms (6281335308068)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.850077ms (6281324131418) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281282.344ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.729432ms (6281346481157) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 53.840543ms (6281357592268)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.729432ms (6281346481157) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281304.819ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281381.570ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.951203ms (6281446739972) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.062314ms (6281457851083)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.951203ms (6281446739972) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281404.856ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 42.797482ms (6281480176196) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 53.858818ms (6281491237532)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.747707ms (6281480126421) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281438.444ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.14ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281482.046ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:11 d wivrn-server[22102]:         next frame: 43.035976ms (6281558122652) (next time for compositor to pick up frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         progress: 54.094319ms (6281569180995)  (latest completed frame)
+Jan 08 21:54:11 d wivrn-server[22102]:         scheduled: 42.983208ms (6281558069884) (oldest waiting frame)
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281516.150ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:11 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281560.013ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.23ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281626.565ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 43.098730ms (6281691771143) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 54.209841ms (6281702882254)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 43.098730ms (6281691771143) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281649.737ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281671.241ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281727.258ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281749.272ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281805.039ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281849.819ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281894.106ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.665834ms (6281959073688) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.776945ms (6281970184799)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.665834ms (6281959073688) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281917.471ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6281961.171ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.23ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282018.600ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282038.834ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.798857ms (6282115024337) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.858780ms (6282126084260)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.747669ms (6282114973149) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282073.289ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.551046ms (6282159578672) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.628917ms (6282170656543)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.462043ms (6282159489669) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282118.092ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.617880ms (6282204131524) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.699443ms (6282215213087)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.538499ms (6282204052143) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282162.580ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282183.886ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.596214ms (6282270950399) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.683241ms (6282282037426)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.528001ms (6282270882186) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282229.420ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282284.305ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282306.400ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282373.025ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.650842ms (6282437952183) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.761953ms (6282449063294)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.650842ms (6282437952183) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282396.366ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.475668ms (6282482515693) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.561489ms (6282493601514)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.403432ms (6282482443457) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282441.106ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.574845ms (6282515928718) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.631204ms (6282526985077)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.520093ms (6282515873966) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282474.418ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282518.106ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:12 d wivrn-server[22102]:         next frame: 42.626567ms (6282605030428) (next time for compositor to pick up frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         progress: 53.712279ms (6282616116140)  (latest completed frame)
+Jan 08 21:54:12 d wivrn-server[22102]:         scheduled: 42.552172ms (6282604956033) (oldest waiting frame)
+Jan 08 21:54:12 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282563.468ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282584.914ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:13 d wivrn-server[22102]:         next frame: 42.343511ms (6282682991019) (next time for compositor to pick up frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         progress: 53.427573ms (6282694075081)  (latest completed frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         scheduled: 42.294119ms (6282682941627) (oldest waiting frame)
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282641.712ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282662.857ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.24ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282718.551ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:13 d wivrn-server[22102]:         next frame: 42.437911ms (6282794390517) (next time for compositor to pick up frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         progress: 53.495079ms (6282805447685)  (latest completed frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         scheduled: 42.383968ms (6282794336574) (oldest waiting frame)
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282753.009ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282797.029ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282818.766ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282889.655ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282907.665ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282930.100ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:13 d wivrn-server[22102]:         next frame: 42.797402ms (6283017173159) (next time for compositor to pick up frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         progress: 53.875435ms (6283028251192)  (latest completed frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         scheduled: 42.704179ms (6283017079936) (oldest waiting frame)
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6282975.440ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.18ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283041.010ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283085.505ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 08 21:54:13 d wivrn-server[22102]:         next frame: 43.235441ms (6283161969166) (next time for compositor to pick up frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         progress: 54.294311ms (6283173028036)  (latest completed frame)
+Jan 08 21:54:13 d wivrn-server[22102]:         scheduled: 43.183200ms (6283161916925) (oldest waiting frame)
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283119.802ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283141.236ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.20ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283197.174ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283219.322ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283274.993ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283297.471ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.16ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.19ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.22ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [wait_for_scheduled_free] 6283353.100ms: Dropping old missed frame in favour for completed new frame
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.17ms!
+Jan 08 21:54:13 d wivrn-server[22102]: DEBUG [log_frame_time_diff] Frame late by 11.21ms!
