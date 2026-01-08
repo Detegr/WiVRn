@@ -67,7 +67,7 @@ void clock_offset_estimator::add_sample(const wivrn::from_headset::timesync_resp
 			latency += s.received - s.query;
 		latency /= samples.size();
 		// packets with too high latency are likely to be retransmitted
-		if (sample.received - sample.query > 3 * latency)
+		if (sample.received - sample.query > 10 * latency)
 		{
 			U_LOG_D("drop packet for latency %" PRIi64 "µs > %" PRIi64 "µs", (sample.received - sample.query) / 1000, latency / 1000);
 			return;
