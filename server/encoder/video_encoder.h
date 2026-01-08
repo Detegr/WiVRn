@@ -57,6 +57,7 @@ protected:
 		uint64_t frame_index = 0;
 		// true if data should be sent over reliable (TCP) socket
 		bool prefer_control = false;
+		std::optional<to_headset::video_stream_data_shard::timing_info_t> timing;
 	};
 
 private:
@@ -98,13 +99,13 @@ private:
 	to_headset::video_stream_data_shard shard;
 
 	to_headset::video_stream_data_shard::timing_info_t timing_info;
-	clock_offset clock;
 
 	std::ofstream video_dump;
 
 	std::shared_ptr<sender> shared_sender;
 
 protected:
+	clock_offset clock;
 	std::atomic_uint32_t pending_bitrate;
 	std::atomic<float> pending_framerate;
 	std::unique_ptr<idr_handler> idr;

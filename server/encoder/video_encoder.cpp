@@ -291,7 +291,10 @@ void video_encoder::encode(wivrn_session & cnx,
 	cnx.dump_time("encode_end", frame_index, os_monotonic_get_ns(), stream_idx);
 	if (data)
 	{
-		timing_info.encode_end = clock.to_headset(os_monotonic_get_ns());
+		if (data->timing)
+			timing_info = *data->timing;
+		else
+			timing_info.encode_end = clock.to_headset(os_monotonic_get_ns());
 		assert(shared_sender);
 		shared_sender->push(std::move(*data));
 	}

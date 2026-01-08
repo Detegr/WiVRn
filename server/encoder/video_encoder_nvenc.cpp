@@ -19,6 +19,7 @@
 
 #include "video_encoder_nvenc.h"
 #include "encoder_settings.h"
+#include "os/os_time.h"
 
 #include "util/u_logging.h"
 #include "utils/wivrn_vk_bundle.h"
@@ -512,6 +513,7 @@ std::optional<video_encoder::data> video_encoder_nvenc::encode(uint8_t slot, uin
 	{
 		std::lock_guard lock(job_mutex);
 		in[slot].frame_index = frame_index;
+		in[slot].timing_info.encode_begin = clock.to_headset(os_monotonic_get_ns());
 	}
 	job_cv.notify_all();
 
@@ -657,6 +659,7 @@ void video_encoder_nvenc::run_encode_consumer()
 
 			// GPU work is done, allow reusing this slot
 			in[slot].frame_index.reset();
+			in[slot].timing_info.encode_end = clock.to_headset(os_monotonic_get_ns());
 			job_cv.notify_all();
 
 			video_encoder::data ret = {
@@ -665,8 +668,8 @@ void video_encoder_nvenc::run_encode_consumer()
 			        .mem = std::move(frame_data),
 			        .frame_index = frame_index,
 			        .prefer_control = frame_type == default_idr_handler::frame_type::i,
+			        .timing = in[slot].timing_info,
 			};
-
 			{
 				std::lock_guard lock(result_mutex);
 				results[slot] = std::move(ret);

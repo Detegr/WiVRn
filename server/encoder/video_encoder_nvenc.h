@@ -75,6 +75,7 @@ private:
 	{
 		std::optional<uint64_t> frame_index; // job is queued if frame_index has value
 		NV_ENC_OUTPUT_PTR output_buffer;
+		to_headset::video_stream_data_shard::timing_info_t timing_info;
 
 		vk::raii::Buffer yuv = nullptr;
 		vk::raii::DeviceMemory mem = nullptr;
