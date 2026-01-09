@@ -139,7 +139,7 @@ NV_ENC_RC_PARAMS video_encoder_nvenc::get_rc_params(uint64_t bitrate, float fram
 	        .vbvInitialDelay = static_cast<uint32_t>(bitrate / framerate),
 	        .enableLookahead = 0,
 	        .lowDelayKeyFrameScale = 1,
-	        .multiPass = NV_ENC_TWO_PASS_QUARTER_RESOLUTION};
+	        .multiPass = NV_ENC_MULTI_PASS_DISABLED};
 }
 
 void video_encoder_nvenc::set_init_params_fps(float framerate)
@@ -177,7 +177,7 @@ video_encoder_nvenc::video_encoder_nvenc(
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-	GUID presetGUID = NV_ENC_PRESET_P4_GUID;
+	GUID presetGUID = NV_ENC_PRESET_P1_GUID;
 	check_preset_guid_supported(shared_state, session_handle, encodeGUID, presetGUID);
 
 	NV_ENC_TUNING_INFO tuningInfo = NV_ENC_TUNING_INFO_ULTRA_LOW_LATENCY;
