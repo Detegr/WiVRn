@@ -65,7 +65,7 @@ wivrn_pacer::wivrn_pacer(uint64_t frame_duration) :
 		        std::ranges::nth_element(samples, it);
 
 		        std::unique_lock lock(mutex);
-		        safe_present_to_decoded_ns = *it + 1'000'000;
+		        safe_present_to_decoded_ns = std::max(*it + 1'000'000, (int64_t)25'000'000);
 	        }
         })
 {}
