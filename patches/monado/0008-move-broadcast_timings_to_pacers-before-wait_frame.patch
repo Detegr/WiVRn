@@ -1,0 +1,42 @@
+From 2ccbbb8e366dee407e5959988c85ec9b5534b040 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Antti=20Ker=C3=A4nen?= <detegr@rbx.email>
+Date: Fri, 9 Jan 2026 22:42:53 +0200
+Subject: [PATCH] move broadcast_timings_to_pacers before wait_frame
+
+---
+ src/xrt/compositor/multi/comp_multi_system.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/src/xrt/compositor/multi/comp_multi_system.c b/src/xrt/compositor/multi/comp_multi_system.c
+index 4a397d7ec..3c38deda1 100644
+--- a/src/xrt/compositor/multi/comp_multi_system.c
++++ b/src/xrt/compositor/multi/comp_multi_system.c
+@@ -546,18 +546,19 @@ multi_main_loop(struct multi_system_compositor *msc)
+ 		// Do this as soon as we have the new display time.
+ 		broadcast_timings_to_clients(msc, predicted_display_time_ns);
+ 
++		// Estimate diff before waiting
++		int64_t now_ns = os_monotonic_get_ns();
++		int64_t estimated_diff_ns = predicted_display_time_ns - MAX(wake_up_time_ns, now_ns);
++
++		// Update pacers BEFORE waiting so apps get correct timing
++		broadcast_timings_to_pacers(msc, predicted_display_time_ns, predicted_display_period_ns, estimated_diff_ns);
++
+ 		// Now we can wait.
+ 		wait_frame(msc, xc, frame_id, wake_up_time_ns);
+ 
+-		int64_t now_ns = os_monotonic_get_ns();
+ 		// Signal that we woke up.
+ 		xrt_comp_mark_frame(xc, frame_id, XRT_COMPOSITOR_FRAME_POINT_WOKE, now_ns);
+ 
+-		int64_t diff_ns = predicted_display_time_ns - MAX(wake_up_time_ns, now_ns);
+-
+-		// Now we know the diff, broadcast to pacers.
+-		broadcast_timings_to_pacers(msc, predicted_display_time_ns, predicted_display_period_ns, diff_ns);
+-
+ 		xrt_comp_begin_frame(xc, frame_id);
+ 
+ 		// Make sure that the clients doesn't go away while we transfer layers.
+-- 
+2.51.2
+
