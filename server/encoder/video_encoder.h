@@ -28,6 +28,7 @@
 #include <cstdint>
 #include <deque>
 #include <fstream>
+#include <map>
 #include <memory>
 #include <mutex>
 #include <thread>
@@ -99,6 +100,7 @@ private:
 	to_headset::video_stream_data_shard shard;
 
 	to_headset::video_stream_data_shard::timing_info_t timing_info;
+	std::map<uint64_t, to_headset::video_stream_data_shard::view_info_t> pending_view_infos;
 
 	std::ofstream video_dump;
 

@@ -25,6 +25,7 @@
 #include "encoder_settings.h"
 #include "os/os_time.h"
 #include "wivrn_config.h"
+#include "util/u_logging.h"
 
 #include <string>
 
@@ -279,18 +280,38 @@ void video_encoder::encode(wivrn_session & cnx,
 	        .encode_begin = clock.to_headset(encode_begin),
 	};
 
+	std::unique_lock lock(mutex);
+	pending_view_infos[frame_index] = view_info;
+
 	// Prepare the video shard template
 	shard.stream_item_idx = stream_idx;
 	shard.frame_idx = frame_index;
 	shard.shard_idx = 0;
 	shard.view_info = view_info;
 	shard.timing_info.reset();
+	lock.unlock();
 
 	auto data = encode(encode_slot, frame_index);
 	cnx.dump_time("encode_begin", frame_index, encode_begin, stream_idx);
 	cnx.dump_time("encode_end", frame_index, os_monotonic_get_ns(), stream_idx);
 	if (data)
 	{
+		lock.lock();
+		if (data->frame_index != 0)
+		{
+			shard.frame_idx = data->frame_index;
+			if (auto it = pending_view_infos.find(data->frame_index); it != pending_view_infos.end())
+			{
+				shard.view_info = it->second;
+				pending_view_infos.erase(pending_view_infos.begin(), ++it);
+			}
+			else
+			{
+				U_LOG_W("Frame index %" PRIu64 " not found in pending view infos", data->frame_index);
+			}
+		}
+		lock.unlock();
+
 		if (data->timing)
 			timing_info = *data->timing;
 		else
