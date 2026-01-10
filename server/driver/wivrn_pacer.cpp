@@ -100,8 +100,8 @@ void wivrn_pacer::predict(
 	if (now + mean_wake_up_to_present_ns + safe_present_to_decoded_ns > predicted_client_render)
 		predicted_client_render += frame_duration_ns * ((now + mean_wake_up_to_present_ns + safe_present_to_decoded_ns - predicted_client_render) / frame_duration_ns);
 
-	out_predicted_display_time_ns = predicted_client_render + mean_render_to_display_ns;
-	out_desired_present_time_ns = predicted_client_render - safe_present_to_decoded_ns;
+	out_predicted_display_time_ns = predicted_client_render + mean_render_to_display_ns + frame_duration_ns;
+	out_desired_present_time_ns = predicted_client_render - safe_present_to_decoded_ns + frame_duration_ns;
 	out_wake_up_time_ns = out_desired_present_time_ns - mean_wake_up_to_present_ns + margin_ns; // we should be awoken early by the application
 	last_wake_up_ns = out_wake_up_time_ns;
 
