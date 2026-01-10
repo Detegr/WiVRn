@@ -94,11 +94,21 @@ void wivrn_pacer::predict(
 	auto now = os_monotonic_get_ns();
 
 	int64_t predicted_client_render = last_ns + frame_duration_ns;
+	int64_t predicted_before_snap = predicted_client_render;
 	// snap to phase
 	predicted_client_render = (predicted_client_render / frame_duration_ns) * frame_duration_ns + client_render_phase_ns;
+	int64_t predicted_after_snap = predicted_client_render;
 
-	if (now + mean_wake_up_to_present_ns + safe_present_to_decoded_ns > predicted_client_render)
-		predicted_client_render += frame_duration_ns * ((now + mean_wake_up_to_present_ns + safe_present_to_decoded_ns - predicted_client_render) / frame_duration_ns);
+	int64_t frames_to_skip = 0;
+	int64_t late_by_ns = (now + mean_wake_up_to_present_ns + safe_present_to_decoded_ns) - predicted_client_render;
+	if (late_by_ns > 0)
+	{
+		// Use ceiling division to ensure we skip at least 1 frame when late
+		// This fixes the case where we're almost-but-not-quite one frame late
+		// (e.g., 11.0ms late with 11.1ms frame period would truncate to 0 with floor division)
+		frames_to_skip = (late_by_ns + frame_duration_ns - 1) / frame_duration_ns;
+		predicted_client_render += frame_duration_ns * frames_to_skip;
+	}
 
 	out_predicted_display_time_ns = predicted_client_render + mean_render_to_display_ns;
 	out_desired_present_time_ns = predicted_client_render - safe_present_to_decoded_ns;
