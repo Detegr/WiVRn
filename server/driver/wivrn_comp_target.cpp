@@ -21,6 +21,7 @@
 
 #include "driver/wivrn_session.h"
 #include "encoder/video_encoder.h"
+#include "os/os_time.h"
 #include "util/u_logging.h"
 #include "utils/scoped_lock.h"
 #include "wivrn_config.h"
@@ -31,6 +32,7 @@
 #include "xrt_cast.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <ranges>
 #include <vector>
 #include <vulkan/vulkan.hpp>
@@ -515,6 +517,21 @@ static void comp_wivrn_present_thread(std::stop_token stop_token, wivrn_comp_tar
 	}
 }
 
+// Enable with WIVRN_PACER_DEBUG=1 (same as pacer)
+static bool comp_target_debug_enabled()
+{
+	static int enabled = -1;
+	if (enabled < 0)
+	{
+		const char * env = std::getenv("WIVRN_PACER_DEBUG");
+		enabled = (env && env[0] == '1') ? 1 : 0;
+	}
+	return enabled == 1;
+}
+
+#define CT_DEBUG(...) \
+	do { if (comp_target_debug_enabled()) U_LOG_I(__VA_ARGS__); } while(0)
+
 static VkResult comp_wivrn_present(struct comp_target * ct,
                                    VkQueue queue_,
                                    uint32_t index,
@@ -523,6 +540,7 @@ static VkResult comp_wivrn_present(struct comp_target * ct,
                                    int64_t present_slop_ns)
 {
 	struct wivrn_comp_target * cn = (struct wivrn_comp_target *)ct;
+	int64_t present_start_ns = os_monotonic_get_ns();
 
 	assert(index < cn->image_count);
 	assert(cn->psc.images[index].status == pseudo_swapchain::status_t::acquired);
@@ -543,6 +561,7 @@ static VkResult comp_wivrn_present(struct comp_target * ct,
 		scoped_lock lock(vk->main_queue->mutex);
 		cn->wivrn_bundle->queue.submit(submit_info);
 		cn->psc.images[index].status = pseudo_swapchain::status_t::free;
+		CT_DEBUG("PRESENT (no layers) index=%u", index);
 		return VK_SUCCESS;
 	}
 
@@ -651,6 +670,16 @@ static VkResult comp_wivrn_present(struct comp_target * ct,
 	cn->psc.status = (1 << (cn->encoder_threads.size() + 1)) - 2;
 	cn->psc.frame_index = info.frame_id;
 	cn->psc.status.notify_all();
+
+	int64_t present_end_ns = os_monotonic_get_ns();
+	CT_DEBUG("PRESENT frame=%ld index=%u desired_present=%.2fms predicted_display=%.2fms",
+	         info.frame_id, index, desired_present_time_ns / 1e6, info.predicted_display_time / 1e6);
+	CT_DEBUG("  actual_time=%.2fms diff_from_desired=%.2fms processing_time=%.2fms",
+	         present_end_ns / 1e6,
+	         (present_end_ns - desired_present_time_ns) / 1e6,
+	         (present_end_ns - present_start_ns) / 1e6);
+	CT_DEBUG("  display_time_to_headset=%.2fms (headset clock)",
+	         view_info.display_time / 1e6);
 
 	return VK_SUCCESS;
 }
