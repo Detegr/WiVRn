@@ -1,0 +1,162 @@
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.10ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6387 BEGIN when=651809.87ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6387 SUBMIT_BEGIN when=651810.30ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6387 SUBMIT_END when=651810.70ms wake_to_present: sample=0.85ms mean=0.99ms (was 1.00ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651807.86ms -> frame=6387 display=651867.19ms (slot 3)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6387 index=0 desired_present=651807.86ms predicted_display=651867.19ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651811.01ms diff_from_desired=3.15ms processing_time=0.30ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107850.45ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6388 now=651811.58ms last_ns=651836.67ms phase=3.35ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651847.79ms after_snap=651847.79ms late_by=-6.40ms frames_skipped=0 final=651847.79ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=0.99ms safe_decode=28.82ms render_to_display=30.52ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651818.97ms predicted_display=651878.31ms wake_up=651820.98ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [wait_for_scheduled_free] 651814.343ms: Dropping old missed frame in favour for completed new frame
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6388 WAKE_UP when=651814.36ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6388 BEGIN when=651814.38ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6388 SUBMIT_BEGIN when=651814.67ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6388 SUBMIT_END when=651814.95ms (REJECTED: outside wake window)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651818.97ms -> frame=6388 display=651878.31ms (slot 4)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6388 index=1 desired_present=651818.97ms predicted_display=651878.31ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651822.76ms diff_from_desired=3.80ms processing_time=7.80ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107861.56ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6389 now=651823.14ms last_ns=651847.78ms phase=3.35ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651858.90ms after_snap=651858.90ms late_by=-5.95ms frames_skipped=0 final=651858.90ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=0.99ms safe_decode=28.82ms render_to_display=30.53ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651830.08ms predicted_display=651889.43ms wake_up=651832.09ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6389 WAKE_UP when=651832.09ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6389 BEGIN when=651832.10ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6389 SUBMIT_BEGIN when=651832.79ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6389 SUBMIT_END when=651833.53ms wake_to_present: sample=1.44ms mean=1.03ms (was 0.99ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651830.08ms -> frame=6389 display=651889.43ms (slot 5)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6389 index=0 desired_present=651830.08ms predicted_display=651889.43ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651833.82ms diff_from_desired=3.74ms processing_time=0.28ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107872.68ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6390 now=651834.38ms last_ns=651858.89ms phase=3.35ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651870.01ms after_snap=651870.01ms late_by=-5.77ms frames_skipped=0 final=651870.01ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.03ms safe_decode=28.82ms render_to_display=30.53ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651841.19ms predicted_display=651900.54ms wake_up=651843.15ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6390 WAKE_UP when=651843.16ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.12ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6390 BEGIN when=651843.17ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6390 SUBMIT_BEGIN when=651843.75ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6390 SUBMIT_END when=651844.49ms wake_to_present: sample=1.34ms mean=1.06ms (was 1.03ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651841.19ms -> frame=6390 display=651900.54ms (slot 6)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6390 index=1 desired_present=651841.19ms predicted_display=651900.54ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651844.79ms diff_from_desired=3.60ms processing_time=0.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107883.79ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6391 now=651845.35ms last_ns=651870.00ms phase=3.34ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651881.12ms after_snap=651881.12ms late_by=-5.88ms frames_skipped=0 final=651881.12ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.06ms safe_decode=28.82ms render_to_display=30.54ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651852.30ms predicted_display=651911.65ms wake_up=651854.23ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6391 WAKE_UP when=651854.24ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.12ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6391 BEGIN when=651854.25ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6391 SUBMIT_BEGIN when=651855.38ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6391 SUBMIT_END when=651855.82ms wake_to_present: sample=1.59ms mean=1.12ms (was 1.06ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651852.30ms -> frame=6391 display=651911.65ms (slot 7)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6391 index=0 desired_present=651852.30ms predicted_display=651911.65ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651856.12ms diff_from_desired=3.82ms processing_time=0.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107894.90ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6392 now=651856.68ms last_ns=651881.11ms phase=3.34ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651892.23ms after_snap=651892.22ms late_by=-5.60ms frames_skipped=0 final=651892.22ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.12ms safe_decode=28.82ms render_to_display=30.54ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651863.40ms predicted_display=651922.77ms wake_up=651865.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6392 WAKE_UP when=651865.29ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.12ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6392 BEGIN when=651865.31ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6392 SUBMIT_BEGIN when=651865.97ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6392 SUBMIT_END when=651866.80ms wake_to_present: sample=1.51ms mean=1.16ms (was 1.12ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651863.40ms -> frame=6392 display=651922.77ms (slot 0)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6392 index=1 desired_present=651863.40ms predicted_display=651922.77ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651867.09ms diff_from_desired=3.69ms processing_time=0.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107906.02ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6393 now=651867.66ms last_ns=651892.22ms phase=3.34ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651903.33ms after_snap=651903.33ms late_by=-5.70ms frames_skipped=0 final=651903.33ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.16ms safe_decode=28.82ms render_to_display=30.55ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651874.51ms predicted_display=651933.88ms wake_up=651876.35ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [on_feedback] FEEDBACK frame=6390 stream=0 present_ns=651841.19ms decoded=651860.46ms diff=19.28ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [on_feedback]   phase: old=3.34ms sample=3.35ms new=3.34ms change=0.002ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [on_feedback]   blitted=651870.01ms displayed=651900.54ms (headset times converted)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [on_feedback]   render_to_display: sample=30.53ms mean=30.55ms (was 30.55ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [on_feedback]   render_to_display: sample=30.53ms mean=30.55ms (was 30.55ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6393 WAKE_UP when=651876.36ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.12ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6393 BEGIN when=651876.37ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6393 SUBMIT_BEGIN when=651877.05ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6393 SUBMIT_END when=651877.73ms wake_to_present: sample=1.37ms mean=1.18ms (was 1.16ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651874.51ms -> frame=6393 display=651933.88ms (slot 1)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6393 index=0 desired_present=651874.51ms predicted_display=651933.88ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651878.03ms diff_from_desired=3.52ms processing_time=0.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107917.13ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6394 now=651878.31ms last_ns=651903.33ms phase=3.34ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651914.44ms after_snap=651914.44ms late_by=-6.13ms frames_skipped=0 final=651914.44ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.18ms safe_decode=28.82ms render_to_display=30.55ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651885.62ms predicted_display=651944.99ms wake_up=651887.45ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6394 WAKE_UP when=651887.45ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.12ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6394 BEGIN when=651887.46ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6394 SUBMIT_BEGIN when=651888.18ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [wait_for_scheduled_free] Two frames have completed GPU work and are waiting to be displayed.
+Jan 10 18:34:56 d wivrn-server[12362]:         next frame: 55.821407ms (651944989354) (next time for compositor to pick up frame)
+Jan 10 18:34:56 d wivrn-server[12362]:         progress: 66.935096ms (651956103043)  (latest completed frame)
+Jan 10 18:34:56 d wivrn-server[12362]:         scheduled: 55.821177ms (651944989124) (oldest waiting frame)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6394 SUBMIT_END when=651889.17ms wake_to_present: sample=1.73ms mean=1.23ms (was 1.18ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651885.62ms -> frame=6394 display=651944.99ms (slot 2)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6394 index=1 desired_present=651885.62ms predicted_display=651944.99ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651889.47ms diff_from_desired=3.85ms processing_time=0.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107928.24ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6395 now=651889.81ms last_ns=651914.44ms phase=3.34ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651925.55ms after_snap=651925.55ms late_by=-5.69ms frames_skipped=0 final=651925.55ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.23ms safe_decode=28.82ms render_to_display=30.55ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651896.73ms predicted_display=651956.10ms wake_up=651898.50ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [wait_for_scheduled_free] 651890.234ms: Dropping old missed frame in favour for completed new frame
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6395 WAKE_UP when=651890.25ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6395 BEGIN when=651890.26ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6395 SUBMIT_BEGIN when=651890.52ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6395 SUBMIT_END when=651890.80ms (REJECTED: outside wake window)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651896.73ms -> frame=6395 display=651956.10ms (slot 3)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6395 index=0 desired_present=651896.73ms predicted_display=651956.10ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651899.54ms diff_from_desired=2.81ms processing_time=8.74ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107939.36ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6396 now=651899.92ms last_ns=651925.55ms phase=3.33ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651936.66ms after_snap=651936.66ms late_by=-6.68ms frames_skipped=0 final=651936.66ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.23ms safe_decode=28.82ms render_to_display=30.56ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651907.84ms predicted_display=651967.22ms wake_up=651909.61ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6396 WAKE_UP when=651909.10ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6396 BEGIN when=651909.11ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6396 SUBMIT_BEGIN when=651909.52ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6396 SUBMIT_END when=651909.99ms wake_to_present: sample=0.38ms mean=1.15ms (was 1.23ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651907.84ms -> frame=6396 display=651967.22ms (slot 4)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6396 index=1 desired_present=651907.84ms predicted_display=651967.22ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651910.37ms diff_from_desired=2.53ms processing_time=0.38ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107950.47ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6397 now=651912.55ms last_ns=651936.66ms phase=3.33ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651947.77ms after_snap=651947.77ms late_by=-5.25ms frames_skipped=0 final=651947.77ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.15ms safe_decode=28.82ms render_to_display=30.55ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651918.95ms predicted_display=651978.33ms wake_up=651920.80ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6397 WAKE_UP when=651920.81ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6397 BEGIN when=651920.82ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6397 SUBMIT_BEGIN when=651921.19ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6397 SUBMIT_END when=651921.89ms wake_to_present: sample=1.09ms mean=1.14ms (was 1.15ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651918.95ms -> frame=6397 display=651978.33ms (slot 5)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6397 index=0 desired_present=651918.95ms predicted_display=651978.33ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651922.56ms diff_from_desired=3.61ms processing_time=0.66ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107961.58ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6398 now=651922.87ms last_ns=651947.75ms phase=3.32ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651958.88ms after_snap=651958.87ms late_by=-6.04ms frames_skipped=0 final=651958.87ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.14ms safe_decode=28.82ms render_to_display=30.59ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651930.04ms predicted_display=651989.45ms wake_up=651931.90ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6398 WAKE_UP when=651931.91ms
+Jan 10 18:34:56 d wivrn-server[12362]: DEBUG [log_frame_time_diff] Frame late by 11.13ms!
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6398 BEGIN when=651931.92ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6398 SUBMIT_BEGIN when=651932.29ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6398 SUBMIT_END when=651933.04ms wake_to_present: sample=1.14ms mean=1.14ms (was 1.14ms)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [present_to_info] LOOKUP present=651930.04ms -> frame=6398 display=651989.45ms (slot 6)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present] PRESENT frame=6398 index=1 desired_present=651930.04ms predicted_display=651989.45ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   actual_time=651933.78ms diff_from_desired=3.73ms processing_time=0.73ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [comp_wivrn_present]   display_time_to_headset=107972.71ms (headset clock)
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict] PREDICT frame=6399 now=651934.61ms last_ns=651958.85ms phase=3.30ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   before_snap=651969.98ms after_snap=651969.96ms late_by=-5.38ms frames_skipped=0 final=651969.96ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   margins: wake_to_present=1.14ms safe_decode=28.82ms render_to_display=30.62ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [predict]   output: desired_present=651941.14ms predicted_display=652000.58ms wake_up=651943.00ms
+Jan 10 18:34:56 d wivrn-server[12362]:  INFO [mark_timing_point] TIMING frame=6399 WAKE_UP when=651943.01ms
