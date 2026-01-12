@@ -5,7 +5,7 @@
   outputs = inputs@{ nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
-      perSystem = { lib, pkgs, ... }: let
+      perSystem = { lib, pkgs, system, ... }: let
         # Tools used for development work (clangd, clang-format)
         devTools = [
           pkgs.clang-tools
@@ -89,9 +89,61 @@
             preFixup = null;
           });
         };
-        devShells.default = package.overrideAttrs (oldAttrs: {
-          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ devTools;
-        });
+        devShells = {
+          default = package.overrideAttrs (oldAttrs: {
+            nativeBuildInputs = oldAttrs.nativeBuildInputs ++ devTools;
+          });
+
+          android-client = let
+            unfreePkgs = import inputs.nixpkgs {
+              inherit system;
+              config = {
+                allowUnfree = true;
+                android_sdk.accept_license = true;
+              };
+            };
+            ndkVersion = "28.2.13676358";
+            androidPkgs = unfreePkgs.androidenv.composeAndroidPackages {
+              includeNDK = true;
+              ndkVersion = ndkVersion;
+              platformVersions = [ "34" ];
+              buildToolsVersions = [ "35.0.0" ];
+              cmakeVersions = [ "3.31.5" ];
+            };
+            androidNdk = androidPkgs.ndk-bundle;
+          in (pkgs.buildFHSEnv {
+            name = "wivrn-android-dev";
+
+            targetPkgs = pkgs: [
+              androidPkgs.androidsdk
+              pkgs.gettext
+              pkgs.glslang
+              pkgs.gradle
+              pkgs.jdk17
+              pkgs.ktx-tools
+              pkgs.librsvg
+              pkgs.spirv-tools
+            ];
+
+            extraBuildCommands = ''
+              # Gradle spawns processes that can't find the binaries
+              # Link them to the FHS path to circumvent this
+              ln -sf ${pkgs.gettext}/bin/* \
+                ${pkgs.glslang}/bin/* \
+                ${pkgs.ktx-tools}/bin/* \
+                ${pkgs.librsvg}/bin/* \
+                ${pkgs.spirv-tools}/bin/* \
+                $out/usr/bin
+            '';
+
+            profile = ''
+              export GRADLE_USER_HOME="$PWD/.gradle"
+              echo -n "Call './gradlew assembleRelease' to build the Android client"
+            '';
+
+            runScript = "bash";
+          }).env;
+        };
       };
     };
 }

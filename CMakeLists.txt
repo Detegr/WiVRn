@@ -87,7 +87,10 @@ if(ENABLE_COLOURED_OUTPUT)
 	endif()
 endif()
 
-find_package(PkgConfig REQUIRED)
+if (NOT ANDROID)
+    find_package(PkgConfig REQUIRED)
+endif()
+
 find_package(Vulkan REQUIRED)
 find_package(Git)
 if (NEED_COMMON)
